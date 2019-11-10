@@ -1,51 +1,45 @@
-//variables for grant health, user health and deaths
-let grantHealth = 10; //grant starts at 10 HP
-let grantDeath = 0; //Death Counter, if counter reaches 3 = grant looses 
-let userHealth = 40; //user starts at 40 HP 
-let userDeath = 0;
-
-/*******************************************************************
- * Function for random Number generator for attach damage
- * 1 or 2 Damage taken from the random number generator 
- *******************************************************************/
-function randomNumber() {
-    let randomNumber = Math.floor(Math.random() * 2) -1;
-}
-
-/*******************************************************************
- * comment
- *******************************************************************/
-
-
-
-/*******************************************************************
- * Conditions for game to stop running either A or B will stop it:
- * A. Grant has been defeated three times (i.e.,, the user has three wins)
- * B. User has been defeated (hit 0 health points). 
- * When the game is over, the application logs the winner.
- *******************************************************************/
-while (userHealth > 0 && grantDeath < 3) {
-    //two random numbers minus from the user and grants health    
-    grantTotal = grantHealth -= randNumber;
-    userTotal = userHealth -= randNumber;
-
-    //log out damage and health
-    console.log(grantTotal);
-    console.log(userTotal);
-
-    //if grant dies
-    if (grantHealth <= 0) {
-        grantDeath++;
-        grantHealth = 10;
+//prompt to ask if the user wants to play the game? types 'yes'
+let startGame = prompt("Do you want to play?");
+if (startGame.toLowerCase() === "yes") {
+    //initialize variables for user / grants && healths for both 
+    let userName = prompt("What is your name?");
+    let userHp = 40;
+    let grantHp = 10;
+    let wins = 0;
+    //logs the starting health of both users and grants hp
+    console.log(`${userName}'s health is ${userHp} and Grant's health is ${grantHp}.`);
+    //starts the loop and the game is started
+    while(startGame) {
+        //random number is subtracted to the user and grants health
+        console.log(`${userName}'s Health: ${userHp -= Math.floor((Math.random()* 2) + 1)} left`);
+        console.log(`Grant's Health: ${grantHp -= Math.floor((Math.random()* 2) + 1)} left`);
+        //condition when user Health hits 0 or less than 0, Grant Wins 
+        if (userHp <= 0) {
+            console.log(`${userName}, you have lost. Grant WINS!`);
+            break;
+            //condition if grants health hits 0 or less than 0, user wins 
+        } else if (grantHp <= 0) {
+            //wins plus 1
+            wins++;
+            //output win and also adds up all the previous wins to show how many more wins you need to win the whole game
+            console.log(`${userName}, you win! Only ${3-wins} wins left to go.`);
+            //grants hp is reset to 10 when user wins
+            grantHp = 10;
+        }
+        //condition to win the while game, when user wins 3 times 
+        if (wins === 3) {
+            console.log(`Victory! You have defeated Grant 3 times!`);
+            break;
+        }
     }
 
-    //if user dies
-    if (userHealth <= 0) {
-        grantDeath++;
-        grantHealth = 10;
-    }
-    
-    //log winner and break;
-    console.log();
-    console.log();
+} else {
+    //if something goes wrong
+    console.log("Error: Try again.")
 }
+
+
+
+
+
+
